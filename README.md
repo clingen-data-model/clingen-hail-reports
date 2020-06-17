@@ -7,4 +7,6 @@ To configure Hail, which this project depends on, please see `hail-instructions.
 
 ## Running
 
-This can either be utilized via the Jupyter notebook `Clingen-Reports.ipynb` which can be opened in the Jupyter notebook environment launched in the Hail connect step, or via a command line utility called `clingen-gnomad-reporting.py`.
+This can either be utilized via the Jupyter notebook `Clingen-Gnomad-FAF-Report.ipynb` which can be opened in the Jupyter notebook environment launched in the Hail connect step.
+
+After running the whole notebook, a file, by default called `report.tsv`, will be output into the same cloud storage directory that the notebook is running in.
