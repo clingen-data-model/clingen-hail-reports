@@ -46,6 +46,19 @@ Small cluster (note: not efficient for running a large scale analysis):
 $ hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-idle 4h --num-preemptible-workers 0 --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com --master-machine-type=n1-highmem-2 --worker-machine-type=n1-standard-2 hail-gnomad-filter
 ```
 
+### Requester Pays
+
+Some buckets (ex: gnomad) may be set as 'requester-pay', which requires a user project to be set in storage API calls. Hail can automatically set this by setting an option on cluster creation:
+
+```
+--requester-pays-allow-all (allow any requester pay API calls)
+--requester-pays-allow-buckets (comma separated buckets, avoid unintended charges from downloads)
+```
+
+```
+$ hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-idle 4h --num-preemptible-workers 0 --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com --master-machine-type=n1-highmem-2 --worker-machine-type=n1-standard-2 --requester-pays-allow-buckets gnomad-public-requester-pays hail-gnomad-filter`
+```
+
 ## Connect to cluster
 
 For interactive use, start a jupyter notebook on the dataproc cluster. This will set up a tunnel to the notebook server on a local machine port. The notebook in this repository can then be uploaded via the Jupyter web interface.
