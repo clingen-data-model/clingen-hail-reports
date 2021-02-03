@@ -9,7 +9,7 @@ https://hail.is/docs/0.2/getting_started.html#installing-hail-on-mac-os-x-or-gnu
 
 ## Service account permissions
 
-By default, Hail will use the default project service account. By default, this service account does not have the necessary permissions to manage Dataproc resources. So either add those permissions to the default service account, or create a new service account for Dataproc/Hail. For example `hail-service-account`. 
+By default, Hail will use the default project service account. By default, this service account does not have the necessary permissions to manage Dataproc resources. So either add those permissions to the default service account, or create a new service account for Dataproc/Hail. For example `hail-service-account`.
 
 The permissions required are `Dataproc Worker`. (I also added `Dataproc Administrator` and `Dataproc Service Agent`, neither of which were sufficient).
 
@@ -29,7 +29,7 @@ The command to start a medium sized cluster (1 master, 2 primary workers, 2 pree
 
 ```
 $ PROJECT=clingen-dev
-$ hailctl dataproc start --project $PROJECT --region us-east1 --zone us-east1-b --max-idle 1h --num-preemptible-workers 2 --service-account=hail-service-account@$PROJECT.iam.gserviceaccount.com hail-gnomad-filter
+$ hailctl dataproc start --project $PROJECT --region us-east1 --zone us-east1-b --max-idle 1h --num-preemptible-workers 2 --service-account=hail-service-account@$PROJECT.iam.gserviceaccount.com cg-hail
 ```
 
 Note that the `--max-idle` flag may not interpret jupyter notebook interaction as interactions with the cluster if no dataproc jobs are being scheduled, and may treat work as being idle, and shut down the cluster earlier than expected.
@@ -37,13 +37,13 @@ Note that the `--max-idle` flag may not interpret jupyter notebook interaction a
 Example, for a project called `clingen-dev`:
 
 ```
-$ hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-idle 1h --num-preemptible-workers 2 --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com hail-gnomad-filter
+$ hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-idle 1h --num-preemptible-workers 2 --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com cg-hail
 ```
 
 Small cluster (note: not efficient for running a large scale analysis):
 
 ```
-$ hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-idle 4h --num-preemptible-workers 0 --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com --master-machine-type=n1-highmem-2 --worker-machine-type=n1-standard-2 hail-gnomad-filter
+$ hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-idle 4h --num-preemptible-workers 0 --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com --master-machine-type=n1-highmem-2 --worker-machine-type=n1-standard-2 cg-hail
 ```
 
 ### Requester Pays
