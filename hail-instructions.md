@@ -46,6 +46,13 @@ Small cluster (note: not efficient for running a large scale analysis):
 $ hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-idle 4h --num-preemptible-workers 0 --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com --master-machine-type=n1-highmem-2 --worker-machine-type=n1-standard-2 cg-hail
 ```
 
+The gnomAD v3.1 dataset constitutes a significant increase in data size over the gnomAD v2.x series. This data must be downloaded onto dataproc worker nodes. Because the dataset is so large, network bandwidth itself can be a bottleneck in run time. For this reason, it may be beneficial to use a larger number of smaller instances rather than a smaller number of larger instances, as spreading data partitions across more instances means less bottlenecking on the network links of each instance.
+
+```
+hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-idle 4h --num-workers 4 --num-preemptible-workers 4 --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com --master-machine-type=n1-highmem-2 --worker-machine-type=n1-standard-2 cg-hail
+```
+
+
 ### Requester Pays
 
 Some buckets (ex: gnomad) may be set as 'requester-pay', which requires a user project to be set in storage API calls. Hail can automatically set this by setting an option on cluster creation:
