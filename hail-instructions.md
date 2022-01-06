@@ -63,7 +63,7 @@ Some buckets (ex: gnomad) may be set as 'requester-pay', which requires a user p
 ```
 
 ```
-$ hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-idle 4h --num-preemptible-workers 0 --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com --master-machine-type=n1-highmem-2 --worker-machine-type=n1-standard-2 --requester-pays-allow-buckets gnomad-public-requester-pays hail-gnomad-filter`
+$ hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-idle 4h --num-preemptible-workers 0 --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com --master-machine-type=n1-highmem-2 --worker-machine-type=n1-standard-2 --requester-pays-allow-buckets gnomad-public-requester-pays cg-hail`
 ```
 
 ## Connect to cluster
@@ -71,5 +71,5 @@ $ hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1
 For interactive use, start a jupyter notebook on the dataproc cluster. This will set up a tunnel to the notebook server on a local machine port. The notebook in this repository can then be uploaded via the Jupyter web interface.
 
 ```
-$ hailctl dataproc connect hail-gnomad-filter notebook
+$ hailctl dataproc connect cg-hail notebook
 ```
