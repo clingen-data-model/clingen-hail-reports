@@ -73,3 +73,11 @@ For interactive use, start a jupyter notebook on the dataproc cluster. This will
 ```
 $ hailctl dataproc connect cg-hail notebook
 ```
+
+
+# NOTES
+
+Mid-size cluster with updated instance types and more CPU on workers. May not be ideal. Much of time spent appears to be downloading gnomad partitions into worker processes. Should experiment with doing a copying of gnomad table into HDFS first and loading the table into Hail from there. Copy might be too slow though. HDFS size dictated by combined size of primary worker boot disks (or local ssds).
+```
+hailctl dataproc start --project clingen-dev --region us-east1 --zone us-east1-b --max-age 8h --service-account=hail-service-account@clingen-dev.iam.gserviceaccount.com --num-preemptible-workers 4 --num-workers 2 --worker-machine-type e2-highcpu-16 --master-machine-type e2-highmem-8 cg-hail
+```
